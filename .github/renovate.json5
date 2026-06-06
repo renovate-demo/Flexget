@@ -9,20 +9,30 @@
     ':prHourlyLimitNone',
     ':preserveSemverRanges',
   ],
-  schedule: ['* 16-23 * * 0', '* 0-12 * * 1'],
+  schedule: [
+    '* 16-23 * * 0',
+    '* 0-12 * * 1',
+  ],
   lockFileMaintenance: {
     enabled: true,
-    schedule: ['* 16-23 * * 0', '* 0-12 * * 1'],
+    schedule: [
+      '* 16-23 * * 0',
+      '* 0-12 * * 1',
+    ],
   },
   gitIgnoredAuthors: [
     'github-actions[bot]@users.noreply.github.com',
     '66853113+pre-commit-ci[bot]@users.noreply.github.com',
   ],
-  addLabels: ['dependencies'],
+  addLabels: [
+    'dependencies',
+  ],
   customManagers: [
     {
       customType: 'regex',
-      managerFilePatterns: ['/^\\.github/workflows/[^/]+\\.ya?ml$/'],
+      managerFilePatterns: [
+        '/^\\.github/workflows/[^/]+\\.ya?ml$/',
+      ],
       matchStrings: [
         '\\s*[A-Z_]+?_VERSION:\\s*["\']?(?<currentValue>.+?)["\']?\\s*# renovate: datasource=(?<datasource>.+?) depName=(?<depName>.+?)\\s',
       ],
@@ -44,8 +54,6 @@
   ],
   customDatasources: {
     readthedocsPython: {
-      // TODO: Schema lists Python versions that the build environment doesn’t support yet, which leads to Renovate opening PRs too early.
-      // Blocked by https://github.com/readthedocs/readthedocs.org/issues/12619
       defaultRegistryUrlTemplate: 'https://raw.githubusercontent.com/readthedocs/readthedocs.org/master/readthedocs/rtd_tests/fixtures/spec/v2/schema.json',
       transformTemplates: [
         '{"releases":properties.build.properties.tools.properties.python.enum[$match($,/^\\d+\\.\\d+$/)].{"version":$}}',
@@ -67,15 +75,24 @@
   },
   packageRules: [
     {
-      extends: [':automergeAll'],
-      matchManagers: ['pre-commit'],
+      extends: [
+        ':automergeAll',
+      ],
+      matchManagers: [
+        'pre-commit',
+      ],
     },
     {
       description: 'Group all ruff updates together.',
       groupName: 'ruff',
-      matchPackageNames: ['ruff', 'astral-sh/ruff-pre-commit'],
+      matchPackageNames: [
+        'ruff',
+        'astral-sh/ruff-pre-commit',
+      ],
       minimumGroupSize: 2,
-      extends: [':automergeAll'],
+      extends: [
+        ':automergeAll',
+      ],
     },
     {
       description: 'Group all uv updates together.',
@@ -86,11 +103,15 @@
         'astral-sh/uv-pre-commit',
       ],
       minimumGroupSize: 3,
-      extends: [':automergeAll'],
+      extends: [
+        ':automergeAll',
+      ],
     },
     {
-      "enabled": false,
-      "matchPackagePatterns": ["*"]
-    }
+      enabled: false,
+      matchPackageNames: [
+        '*',
+      ],
+    },
   ],
 }
