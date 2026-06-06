@@ -2,6 +2,7 @@
 *.noseids
 *.pyc
 *.sqlite
+test
 *.swo
 *.swp
 *~
