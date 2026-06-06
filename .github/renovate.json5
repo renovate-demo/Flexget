@@ -88,5 +88,9 @@
       minimumGroupSize: 3,
       extends: [':automergeAll'],
     },
+    {
+      "enabled": false,
+      "matchPackagePatterns": ["*"]
+    }
   ],
 }
